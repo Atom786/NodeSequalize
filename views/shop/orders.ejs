@@ -1,0 +1,48 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/cart.css">
+<link rel="stylesheet" href="/css/product.css">
+    </head>
+
+    <body>
+        <%- include('../includes/navigation.ejs') %>
+        <main>
+            <% if(orders.length<=0) {%>
+                <h1>Nothing there!</h1>
+                <%} else {%>
+                 <ul class="cart__item-list">
+                    <% orders.forEach(order =>{%>
+                    <li class="cart__item">
+                        <% order.products.forEach(item =>{%>
+                        <div class="card__image">
+                            <img style="height: 15rem;" src="<%= item.imageUrl %>" alt="<%= item.title %>">
+                        </div>
+                        <header class="card__header">
+                            <a  href="/products/<%= order.id%>" class="product__title">
+                                <%= item.title %>
+                            </a>
+                        </header>
+                        <h3>Quantity: <%= item.orderItem.quantity%></h3>
+                        <% }) %>
+                    </li> 
+                <% }) %>
+            </ul><hr><hr>
+            <%orders.forEach(order =>{ order.products.forEach(price =>{%>
+            <h3>Total Price : <%= price.price %> </h3>
+            <%});%>
+            <%});%>
+            <%}%>
+        </main>
+        <%- include('../includes/end.ejs') %>
+
+
+
+
+
+
+
+
+
+
+
+
+
